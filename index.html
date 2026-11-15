@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Оставьте отзыв</title>
+    <style>
+        body { font-family: -apple-system, sans-serif; background: #f8f9fa; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; padding: 20px; text-align: center; }
+        h1 { font-size: 22px; color: #222; margin-bottom: 10px; }
+        p { font-size: 15px; color: #666; margin-bottom: 30px; max-width: 300px; }
+        .button { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; max-width: 320px; padding: 16px; margin-bottom: 15px; text-decoration: none; font-size: 17px; font-weight: 600; border-radius: 14px; color: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .button img { height: 24px; width: 24px; object-fit: contain; background: #fff; border-radius: 4px; }
+        .yandex { background-color: #fc3f1d; }
+        .gis { background-color: #2b9e4b; }
+        .button:active { transform: scale(0.97); }
+    </style>
+</head>
+<body>
+
+    <h1>Мы ценим вас!</h1>
+    <p id="shopNameText">Пожалуйста, оставьте отзыв. Это помогает нам становиться лучше.</p>
+
+    <a id="btn-yandex" class="button yandex" href="#">
+        <img src="яндекс.jpg" alt="Яндекс">
+        Отзыв в Яндекс Картах
+    </a>
+    
+    <a id="btn-gis" class="button gis" href="#">
+        <img src="2ГИС.jpg" alt="2ГИС">
+        Отзыв в 2ГИС
+    </a>
+
+    <script>
+        // Читаем данные из ссылки
+        const params = new URLSearchParams(window.location.search);
+        const shopName = params.get('name');
+        const yaLink = params.get('ya');
+        const gisLink = params.get('gis');
+
+        // Если данные есть - подставляем
+        if (shopName) {
+            document.getElementById('shopNameText').innerHTML = `Пожалуйста, оставьте отзыв о магазине <b>${shopName}</b>. Это помогает нам становиться лучше.`;
+        }
+        if (yaLink) {
+            document.getElementById('btn-yandex').href = decodeURIComponent(yaLink);
+        }
+        if (gisLink) {
+            document.getElementById('btn-gis').href = decodeURIComponent(gisLink);
+        }
+    </script>
+
+</body>
+</html>
