@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="0; url=index.html">
+    <title>Перенаправление...</title>
+</head>
+<body>
+    <script>
+        // Получаем параметры из адреса
+        const params = new URLSearchParams(window.location.search);
+        const shop = params.get('shop');
+        
+        // Твоя база магазинов (сюда добавляй новые)
+        const shops = {
+            'shaurmania': {
+                name: 'Shaurmania',
+                ya: 'https://yandex.ru/maps/-/CXSYq0~e',
+                gis: 'https://2gis.ru/vologda/geo/70000001060536635'
+            },
+            'gladiator': {
+                name: 'Гладиатор FixGame',
+                ya: 'https://yandex.ru/maps/org/gladiator_fixgame/62666441913',
+                gis: 'https://go.2gis.com/CnJbI'
+            }
+            // Добавляй сюда новых по тому же принципу
+        };
+
+        if (shop && shops[shop]) {
+            const s = shops[shop];
+            // Формируем ссылку на основную страницу с кнопками
+            const targetUrl = `index.html?name=${encodeURIComponent(s.name)}&ya=${encodeURIComponent(s.ya)}&gis=${encodeURIComponent(s.gis)}`;
+            // Перенаправляем
+            window.location.replace(targetUrl);
+        } else {
+            // Если магазин не найден, просто открываем главную
+            window.location.replace('index.html');
+        }
+    </script>
+</body>
+</html>
